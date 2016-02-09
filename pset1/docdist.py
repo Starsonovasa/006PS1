@@ -35,7 +35,7 @@ def doc_dist(word_list1, word_list2):
     """
 #    #TODO
 #    pass
-    
+#    
     #Creates a frequency dictionary with the following format:
     #   freq_dict[word] = [freq_word_in_doc1, freq_word_in_doc2]
     
@@ -63,10 +63,11 @@ def doc_dist(word_list1, word_list2):
     
     #Find the magnitudes of each document vector and compute their dot product
     for word in freq_dict:
-        doc_1_magnitude += doc_1_freq(word)**2
-        doc_2_magnitude += doc_2_freq(word)**2
+        word_freq = freq_dict[word]
+        doc_1_magnitude += doc_1_freq(word_freq)**2
+        doc_2_magnitude += doc_2_freq(word_freq)**2
         
-        dot_product += doc_1_freq(word)*doc_2_freq(word)
+        dot_product += doc_1_freq(word_freq)*doc_2_freq(word_freq)
         
     #Divide the dot product by the product of the magnitudes of each vector,
     #and then take the inverse cosine of this quantity to find the angle between
@@ -79,13 +80,13 @@ def doc_dist(word_list1, word_list2):
 
 #Takes a two-element list where the fist element is the frequency that a word
 #appears in the first document and returns that frequency
-def doc_1_freq(word):
-    return word[0]
+def doc_1_freq(word_freq):
+    return word_freq[0]
 
 #Takes a two-element list where the second element is the frequency that a word
 #appears in the the second document and returns that freqeuency
-def doc_2_freq(word):
-    return word[1]
+def doc_2_freq(word_freq):
+    return word_freq[1]
 ##############################################
 ## Part b. Count the frequency of each pair ##
 ##############################################
