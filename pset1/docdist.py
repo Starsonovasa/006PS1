@@ -97,8 +97,24 @@ def doc_dist_pairs(word_list1, word_list2):
     consecutive pairs of words when given the list of
     words from both files
     """
-    #TODO
-    pass
+#     #TODO
+#     pass
+    
+    #This time the keys of the dictionary will be tuples of words in the order that
+    #they appear in the document. Creates a dictionary with the following format:
+    #    freq_dict[(word1, word2)] = [freq_word_pair_in_doc1, freq_word_pair_in_doc2]
+    freq_dict = {}
+    
+    word_list1_len = len(word_list1)
+    word_list2_len = len(word_list2)
+    
+    #Since we are dealing with pairs of words, we don't want to try to reference
+    #an element outside of the range of the list, so rather than having the range
+    #going from 0 to the length of the list, we have the list going from 0 to the 
+    #length of the list minus 1
+    for i in range(0,word_list1_len-1):
+        
+        
 
 #############################################################
 ## Part c. Count the frequency of the 50 most common words ##
