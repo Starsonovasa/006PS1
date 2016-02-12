@@ -61,7 +61,8 @@ def doc_dist(word_list1, word_list2):
     
     dot_product = 0.0
     
-    #Find the magnitudes of each document vector and compute their dot product
+    #Find the square of the magnitude of each document vector and compute the dot product of
+    #the two vectors
     for word in freq_dict:
         word_freq = freq_dict[word]
         doc_1_magnitude += doc_1_freq(word_freq)**2
@@ -69,12 +70,18 @@ def doc_dist(word_list1, word_list2):
         
         dot_product += doc_1_freq(word_freq)*doc_2_freq(word_freq)
         
+    #Square root to get the actual magnitudes
+    doc_1_magnitude = math.sqrt(doc_1_magnitude)
+    doc_2_magnitude = math.sqrt(doc_2_magnitude)
+    
+    
     #Divide the dot product by the product of the magnitudes of each vector,
     #and then take the inverse cosine of this quantity to find the angle between
     #each document in radians
     product_of_magnitudes = doc_1_magnitude * doc_2_magnitude
     angle_between = math.acos(dot_product/product_of_magnitudes)
     
+    print angle_between
     return angle_between
     
 
