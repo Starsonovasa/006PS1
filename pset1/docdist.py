@@ -119,10 +119,53 @@ def doc_dist_pairs(word_list1, word_list2):
     #an element outside of the range of the list, so rather than having the range
     #going from 0 to the length of the list, we have the list going from 0 to the 
     #length of the list minus 1
+    
+    #Add the word pairs and their frequency in doc1 to the frequency dict
     for i in range(0,word_list1_len-1):
-        
-        
+        word_pair = (word_list1[i], word_list1[i+1])
+        if word_pair not in freq_dict:
+            freq_dict[word_pair] = [1.0, 0.0]
+        else:
+            freq_dict[word_pair][0] += 1.0
+    
+            
+    #Add the word pairs and their frequency in doc2 to the frequency dict
+    for i in range(0, word_list2_len-1):
+        word_pair = (word_list2[i], word_list2[i+1])
+        if word_pair not in freq_dict:
+            freq_dict[word_pair] = [0.0, 1.0]
+        else:
+            freq_dict[word_pair][1] += 1.0   
 
+    
+    #Create variables for the magnitudes of each document vector
+    doc_1_magnitude = 0.0
+    doc_2_magnitude = 0.0
+    
+    dot_product = 0.0
+    
+    #Find the square of the magnitude of each document vector and compute the dot product of
+    #the two vectors
+    for word_pair in freq_dict:
+        word_freq = freq_dict[word_pair]
+        doc_1_magnitude += doc_1_freq(word_freq)**2
+        doc_2_magnitude += doc_2_freq(word_freq)**2
+        
+        dot_product += doc_1_freq(word_freq)*doc_2_freq(word_freq)
+        
+    #Square root to get the actual magnitudes
+    doc_1_magnitude = math.sqrt(doc_1_magnitude)
+    doc_2_magnitude = math.sqrt(doc_2_magnitude)
+    
+    
+    #Divide the dot product by the product of the magnitudes of each vector,
+    #and then take the inverse cosine of this quantity to find the angle between
+    #each document in radians
+    product_of_magnitudes = doc_1_magnitude * doc_2_magnitude
+    angle_between = math.acos(dot_product/product_of_magnitudes)
+    
+    print angle_between
+    return angle_between
 #############################################################
 ## Part c. Count the frequency of the 50 most common words ##
 #############################################################
