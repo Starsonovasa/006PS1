@@ -234,8 +234,6 @@ def doc_dist_50(word_list1, word_list2):
     #Now to add the elements from the sorted lists to the dictionary choosing only the
     #first 50 elements of each list
     
-    #TODO: this is wrong. I'm only taking into account the length of one list whereas
-    #the other list could be of very different length
     for i in range(0, min(50, len(word_freq_tuple_list1))):
         word_and_freq1 = word_freq_tuple_list1[i]
         
@@ -245,7 +243,7 @@ def doc_dist_50(word_list1, word_list2):
         if doc1_word not in freq_dict.keys():
             freq_dict[doc1_word] = [doc1_word_freq, 0.0]
         else:
-            freq_dict[doc1_word][0] += 1.0
+            freq_dict[doc1_word][0] = doc1_word_freq
             
     for i in range(0, min(50, len(word_freq_tuple_list2))):
         word_and_freq2 = word_freq_tuple_list2[i]
@@ -256,7 +254,7 @@ def doc_dist_50(word_list1, word_list2):
         if doc2_word not in freq_dict.keys():
             freq_dict[doc2_word] = [0.0, doc2_word_freq]
         else:
-            freq_dict[doc2_word][1] += 1.0
+            freq_dict[doc2_word][1] = doc2_word_freq
     #Create variables for the magnitudes of each document vector
     doc_1_magnitude = 0.0
     doc_2_magnitude = 0.0
